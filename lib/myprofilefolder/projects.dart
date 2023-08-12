@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class Project {
   final String title;
   final String description;
@@ -9,7 +7,7 @@ class Project {
   Project({required this.title, required this.description});
 }
 
-class MyprojectApp extends StatelessWidget {
+class MyProjectApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,30 +55,36 @@ class _ProjectPageState extends State<ProjectPage> {
           showModalBottomSheet(
             context: context,
             builder: (BuildContext context) {
-              return Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      controller: _titleController,
-                      decoration: InputDecoration(labelText: 'Project Title',),
-                    ),
-                    SizedBox(height: 16.0),
-                    TextField(
-                      controller: _descriptionController,
-                      decoration: InputDecoration(labelText: 'Project Description'),
-                      maxLines: 4,
-                    ),
-                    SizedBox(height: 16.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        _addProject();
-                        Navigator.pop(context);
-                      },
-                      child: Text('Add Project'),
-                    ),
-                  ],
+              return AnimatedPadding(
+                duration: Duration(milliseconds: 300),
+                padding: MediaQuery.of(context).viewInsets,
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextField(
+                        controller: _titleController,
+                        decoration: InputDecoration(labelText: 'Project Title'),
+                      ),
+                      SizedBox(height: 16.0),
+                      TextField(
+                        controller: _descriptionController,
+                        decoration: InputDecoration(labelText: 'Project Description'),
+                        maxLines: 4,
+                      ),
+                      SizedBox(height: 16.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          Future.delayed(Duration(milliseconds: 200), () {
+                            _addProject();
+                            Navigator.pop(context);
+                          });
+                        },
+                        child: Text('Add Project'),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -104,7 +108,7 @@ class ProjectCard extends StatefulWidget {
 
 class _ProjectCardState extends State<ProjectCard> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _animation;
+  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
@@ -113,14 +117,14 @@ class _ProjectCardState extends State<ProjectCard> with SingleTickerProviderStat
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _scaleAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
     return ScaleTransition(
-      scale: _animation,
+      scale: _scaleAnimation,
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: ListTile(
@@ -136,4 +140,8 @@ class _ProjectCardState extends State<ProjectCard> with SingleTickerProviderStat
     _controller.dispose();
     super.dispose();
   }
+}
+
+void main() {
+  runApp(MyProjectApp());
 }

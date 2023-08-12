@@ -38,6 +38,8 @@ class _QualificationFormState extends State<QualificationForm> {
   String _title = '';
   String _grade = '';
   String _description = '';
+
+
   void _addQualification() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -66,6 +68,45 @@ class _QualificationFormState extends State<QualificationForm> {
         print('Error adding qualification: $error');
       }
     }
+  }
+
+  Future<void> _fetchQualifications() async {
+    try {
+      CollectionReference qualificationsCollection =
+      FirebaseFirestore.instance.collection('qualifications');
+
+      QuerySnapshot querySnapshot = await qualificationsCollection.get();
+
+      List<Qualification> fetchedQualifications = [];
+
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        String title = data['title'] ?? '';
+        String grade = data['grade'] ?? '';
+        String description = data['description'] ?? '';
+
+        Qualification qualification = Qualification(title, grade, description);
+        fetchedQualifications.add(qualification);
+      });
+
+      setState(() {
+        qualifications = fetchedQualifications;
+      });
+    } catch (error) {
+      // Handle error here
+      print('Error fetching qualifications: $error');
+    }
+  }
+
+///The _fetchQualifications function is responsible for fetching data from Firestore.
+  ///You should call this function to retrieve the data when your app loads.
+  ///You can do this by calling _fetchQualifications() in the initState method of the _QualificationFormState
+  ///class:
+// dart
+  @override
+  void initState() {
+    super.initState();
+    _fetchQualifications();
   }
 
 

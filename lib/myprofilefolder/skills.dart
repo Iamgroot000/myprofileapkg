@@ -1,274 +1,223 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class SkillPage extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _SkillPageState createState() => _SkillPageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Skills App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: SkillsPage(),
+    );
+  }
 }
-/// SingleTickerProviderStateMixin use for the animation
-class _SkillPageState extends State<SkillPage> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  bool isAnimating = true;
 
-
+class SkillsPage extends StatefulWidget {
   @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 1),
-    )..repeat(reverse: true);
-    _startScraping();
-  }
+  _SkillsPageState createState() => _SkillsPageState();
+}
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
+class _SkillsPageState extends State<SkillsPage> {
+  TextEditingController _descriptionController = TextEditingController();
+  List<SkillWithProjects> _skills = [];
+  String? _highlightedSkill;
 
-  Future<void> _startScraping() async {
-    await Future.delayed(Duration(seconds: 2));
+  void _addSkill(String skill, List<String> projects) {
     setState(() {
-      // Update your UI elements here
+      _skills.add(SkillWithProjects(skill: skill, projects: projects));
+      _highlightedSkill = skill;
     });
   }
 
-  void _toggleAnimation() {
+  void _editSkill(int index, String newSkill, List<String> newProjects) {
     setState(() {
-      if (isAnimating) {
-        _animationController.stop();
-      } else {
-        _animationController.repeat(reverse: true);
-      }
-      isAnimating = !isAnimating;
+      _skills[index] = SkillWithProjects(skill: newSkill, projects: newProjects);
     });
   }
-  //
-  // void _showFlutterMessage() {
-  //   setState(() {
-  //     message = "Hi, I know Flutter!";
-  //     isAnimating = false;
-  //   });
-  // }
-  //
-  // void _showDartMessage() {
-  //   setState(() {
-  //     message = "Hi, I know Dart!";
-  //     isAnimating = false;
-  //   });
-  // }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          color: Colors.black,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // SingleChildScrollView with a Row for scrolling text
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "Hi my name is gaurav parmar and I am a flutter developer "
-                            "and my skills are flutter, firebase, dart, and scraping",
-                        style: TextStyle(color: Colors.yellow),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              SizedBox(height: 20,),
-
-              GestureDetector(
-                onTap: () {
-                  _toggleAnimation();
-                  //_showFlutterMessage(); // Show message and stop animation
-                },
-                child: AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return Transform.rotate(
-                      angle: _animationController.value * 2.0 * 3.14159,
-                      child: child,
-                    );
-                  },
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.blue,
-                    child: Center(
-                      child: Text(
-                        'Flutter',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 20,),
-
-              Visibility(
-                visible: !isAnimating,
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                    children: [
-
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 20,),
-
-
-              GestureDetector(
-                onTap: () {
-                  _toggleAnimation();
-                 //_showDartMessage();// Show message and stop animation
-                },
-                child: AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return Transform.rotate(
-                      angle: _animationController.value * 2.0 * 3.14159,
-                      child: child,
-                    );
-                  },
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.blue,
-                    child: Center(
-                      child: Text(
-                        'Dart',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 20,),
-
-              Visibility(
-                visible: !isAnimating,
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                    children: [
-
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 20,),
-
-              GestureDetector(
-                onTap: () {
-                  _toggleAnimation();
-                  //_showFlutterMessage(); // Show message and stop animation
-                },
-                child: AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return Transform.rotate(
-                      angle: _animationController.value * 2.0 * 3.14159,
-                      child: child,
-                    );
-                  },
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.blue,
-                    child: Center(
-                      child: Text(
-                        'Firebase',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 20,),
-
-              Visibility(
-                visible: !isAnimating,
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                    children: [
-
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 20,),
-
-              GestureDetector(
-                onTap: () {
-                  _toggleAnimation();
-                  //_showFlutterMessage(); // Show message and stop animation
-                },
-                child: AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return Transform.rotate(
-                      angle: _animationController.value * 2.0 * 3.14159,
-                      child: child,
-                    );
-                  },
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.blue,
-                    child: Center(
-                      child: Text(
-                        'Scraping',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 20,),
-
-              Visibility(
-                visible: !isAnimating,
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                    children: [
-
-                    ],
-                  ),
-                ),
-              ),
-
-
-
-
-              // ... Other GestureDetector widgets for Dart, Firebase, and Scraping ...
-            ],
+      appBar: AppBar(
+        title: Text('Skills App'),
+      ),
+      body: Column(
+        children: [
+          TextFormField(
+            controller: _descriptionController,
+            decoration: InputDecoration(
+              labelText: 'Description',
+            ),
           ),
-        ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _skills.length,
+              itemBuilder: (context, index) {
+                return SkillItem(
+                  skill: _skills[index].skill,
+                  projects: _skills[index].projects,
+                  isHighlighted: _skills[index].skill == _highlightedSkill,
+                  onEdit: (newSkill, newProjects) {
+                    _editSkill(index, newSkill, newProjects);
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return AddSkillDialog(
+                onAdd: (skill, projects) {
+                  _addSkill(skill, projects);
+                  Navigator.pop(context);
+                },
+              );
+            },
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
 }
+
+
+
+
+
+
+
+class SkillItem extends StatefulWidget {
+  final String skill;
+  final List<String> projects;
+  final bool isHighlighted;
+  final Function(String, List<String>) onEdit;
+
+  SkillItem({required this.skill, required this.projects, required this.isHighlighted, required this.onEdit});
+
+  @override
+  _SkillItemState createState() => _SkillItemState();
+}
+
+class _SkillItemState extends State<SkillItem> {
+  bool _isEditing = false;
+  late TextEditingController _controller;
+  late TextEditingController _projectsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.skill);
+    _projectsController = TextEditingController(text: widget.projects.join('\n'));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: _isEditing
+          ? TextFormField(
+        controller: _controller,
+        onFieldSubmitted: (newSkill) {
+          widget.onEdit(newSkill, widget.projects);
+          setState(() {
+            _isEditing = false;
+          });
+        },
+      )
+          : Text(
+        widget.skill,
+        style: TextStyle(
+          color: widget.isHighlighted ? Colors.green : Colors.black,
+        ),
+      ),
+      trailing: _isEditing
+          ? IconButton(
+        icon: Icon(Icons.check),
+        onPressed: () {
+          widget.onEdit(_controller.text, widget.projects);
+          setState(() {
+            _isEditing = false;
+          });
+        },
+      )
+          : IconButton(
+        icon: Icon(Icons.edit),
+        onPressed: () {
+          setState(() {
+            _isEditing = true;
+          });
+        },
+      ),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Projects:',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(widget.projects.join('\n')),
+        ],
+      ),
+    );
+  }
+}
+
+class AddSkillDialog extends StatefulWidget {
+  final Function(String, List<String>) onAdd;
+
+  AddSkillDialog({required this.onAdd});
+
+  @override
+  _AddSkillDialogState createState() => _AddSkillDialogState();
+}
+
+class _AddSkillDialogState extends State<AddSkillDialog> {
+  TextEditingController _controller = TextEditingController();
+  TextEditingController _projectsController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextFormField(
+            controller: _controller,
+            decoration: InputDecoration(labelText: 'Skill'),
+          ),
+          TextFormField(
+            controller: _projectsController,
+            decoration: InputDecoration(labelText: 'Projects (separated by newline)'),
+            maxLines: null,
+          ),
+          SizedBox(height: 16.0),
+          ElevatedButton(
+            onPressed: () {
+              List<String> projects = _projectsController.text.split('\n').where((element) => element.trim().isNotEmpty).toList();
+              widget.onAdd(_controller.text, projects);
+            },
+            child: Text('Add Skill'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SkillWithProjects {
+  final String skill;
+  final List<String> projects;
+
+  SkillWithProjects({required this.skill, required this.projects});
+}
+
+

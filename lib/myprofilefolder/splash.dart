@@ -1,31 +1,44 @@
-//
-//
-//
-// import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// import 'package:url_launcher/url_launcher.dart';
-// import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+// import 'package:your_splash/your_splash.dart';
 //
 //
-// class MyPlugin extends StatelessWidget {
-//   launchWhatsApp() async {
-//     final link = WhatsAppUnilink(
-//       phoneNumber: '+91- 7536868981',
-//       text: "Hey there!",
+//
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: SplashScreen.timed(
+//         seconds: 3,
+//         route: MaterialPageRoute(builder: (_) => Home()),
+//         body: Scaffold(
+//           body: InkWell(
+//             child: Container(
+//               decoration: const BoxDecoration(
+//                 image: DecorationImage(
+//                   fit: BoxFit.cover,
+//                   image: NetworkImage('https://bit.ly/3hD5Tj8'),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
 //     );
-//     await launch('$link');
 //   }
+// }
 //
+// class Home extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//
+//       appBar: AppBar(
+//         title: Text("Home screen!"),
+//       ),
 //       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () {
-//             launchWhatsApp();
-//           },
-//           child: Text("Go to Whatsapp"),
+//         child: Text(
+//           "Welcome!",
+//           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40.0),
 //         ),
 //       ),
 //     );

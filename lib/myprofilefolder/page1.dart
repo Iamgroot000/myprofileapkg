@@ -89,7 +89,7 @@ class _page1State extends State<page1> {
                               child: ElevatedButton(
                                 onPressed: () { Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>  SkillPage ()), // Replace SecondScreen() with your desired screen widget
+                                  MaterialPageRoute(builder: (context) =>  SkillsPage  ()), // Replace SecondScreen() with your desired screen widget
                                 );},
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
@@ -141,7 +141,7 @@ class _page1State extends State<page1> {
                                 onPressed: () {
                                   Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>  MyprojectApp  ()), // Replace SecondScreen() with your desired screen widget
+                                  MaterialPageRoute(builder: (context) =>  MyProjectApp  ()), // Replace SecondScreen() with your desired screen widget
                                 );},
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
@@ -173,6 +173,9 @@ class _page1State extends State<page1> {
                           ],
                         ),
 
+
+
+
                         SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -195,6 +198,7 @@ class _page1State extends State<page1> {
                             ),
                           ],
                         ),
+
                       ],
                     ),
                   ),
