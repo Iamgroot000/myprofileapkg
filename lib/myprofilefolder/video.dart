@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -26,6 +27,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _fileWidgets = [];
+  final FirebaseStorage storage = FirebaseStorage.instance;
+  var imageResult;
+  String pdfUrl = "";
+  bool uploaded = false;
 
   Future<void> _uploadFileToFirebase(File file) async {
     try {
@@ -40,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _openFilePicker() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
+      //allowMultiple: true,
       type: FileType.custom, // Allow only image and PDF files
       allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
     );
@@ -47,21 +53,25 @@ class _MyHomePageState extends State<MyHomePage> {
     if (result != null) {
       PlatformFile file = result.files.single;
 
-      if (file.extension == 'jpg' || file.extension == 'jpeg' || file.extension == 'png') {
-        // Handle image upload as before
-        // ...
-
-      } else if (file.extension == 'pdf') {
+      if (file.extension == 'jpg' || file.extension == 'jpeg' ||
+          file.extension == 'png' || file.extension == 'pdf') {
         try {
-          firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+          firebase_storage.Reference ref = firebase_storage.FirebaseStorage
+              .instance
               .ref()
-              .child('uploaded_files/${DateTime.now().millisecondsSinceEpoch}.${file.extension}');
-          firebase_storage.UploadTask uploadTask = ref.putFile(File(file.path!));
+              .child('uploaded_files/${DateTime
+              .now()
+              .millisecondsSinceEpoch}.${file.extension}');
+          firebase_storage.UploadTask uploadTask = ref.putFile(
+              File(file.path!));
 
-          firebase_storage.TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+          firebase_storage.TaskSnapshot taskSnapshot = await uploadTask
+              .whenComplete(() => null);
 
-          String pdfUrl = await taskSnapshot.ref.getDownloadURL();
+            pdfUrl = await taskSnapshot.ref.getDownloadURL();
+            uploaded = true;
 
+          print(" this is pdf url : $pdfUrl");
           setState(() {
             _fileWidgets.add(
               Column(
@@ -69,10 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   PDFView(
                     filePath: pdfUrl,
                   ),
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: Text("OK"),
-                  ),
+                  // OutlinedButton(
+                  //   onPressed: () {},
+                  //   child: Text("OK"),
+                  // ),
                 ],
               ),
             );
@@ -90,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         });
       }
+
     }
   }
 
@@ -114,12 +125,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: _openFilePicker,
                     child: Text('Add Your Document'),
                   ),
-                  Column(
-                    children: [
-                      OutlinedButton(onPressed: (){},
-                          child: Text("OK")),
-                    ],
-                  ),
+                 Container(
+                   height: 200,
+                   width: 200,
+                   child: uploaded == false ? const Icon(Icons.image,color: Colors.orangeAccent,size: 100,) : Image.network(pdfUrl),
+                 )
                 ],
               ),
 

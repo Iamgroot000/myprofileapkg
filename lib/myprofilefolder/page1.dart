@@ -16,7 +16,6 @@ import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import '../floating.dart';
 import 'Experincepage.dart';
 import 'Qualification.dart';
-import 'firebase_options.dart';
 
 
 
@@ -115,7 +114,7 @@ class _page1State extends State<page1> {
                           children: [
                             Container(
                               height: 40,
-                              width: 100,
+                              width: 150,
                               child: ElevatedButton(
                                 onPressed: () { Navigator.push(
                                   context,
@@ -136,7 +135,7 @@ class _page1State extends State<page1> {
                           children: [
                             Container(
                               height: 40,
-                              width: 100,
+                              width: 130,
                               child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(

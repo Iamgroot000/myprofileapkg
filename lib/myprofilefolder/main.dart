@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:myprofileapk/myprofilefolder/page1.dart';
 
 import 'Experincepage.dart';
-import 'firebase_options.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -96,7 +95,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                       radius: 100,
                       // backgroundImage: FileImage(File(_imagePath != null)),
                        foregroundImage: imagePath == ""?
-                       Image.asset("assets/gaurav.jpg").image:
+                       Image.asset("assets/dp1.jpg").image:
                        Image.file(File(imagePath)).image,
                         // Use FileImage for picked image
                           // Use AssetImage for default image
@@ -144,11 +143,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
 
 
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp( ExperiencePage());
-
-}
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+//   runApp( ExperiencePage());
+//
+// }

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:myprofileapk/myprofilefolder/signin.dart';
 
-import 'myprofilefolder/firebase_options.dart';
+import 'firebase_options.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
