@@ -88,7 +88,7 @@ class _page1State extends State<page1> {
                               child: ElevatedButton(
                                 onPressed: () { Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>  skillspage ()), // Replace SecondScreen() with your desired screen widget
+                                  MaterialPageRoute(builder: (context) =>  SkillsPage ()), // Replace SecondScreen() with your desired screen widget
                                 );},
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
