@@ -5,10 +5,11 @@ import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myprofileapk/myprofilefolder/projects.dart';
 
-import 'package:myprofileapk/myprofilefolder/skills.dart';
-import 'package:myprofileapk/myprofilefolder/video.dart';
+import 'package:myprofileapk/document.dart';
+import 'package:myprofileapk/projects.dart';
+import 'package:myprofileapk/skills.dart';
+import 'package:myprofileapk/videointro.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
@@ -46,7 +47,7 @@ class _page1State extends State<page1> {
             children: [
               Center(
                 child: Container(
-                  height:600,
+                  height:650,
                   width: 400,
                  // color: Colors.white,
                   child: SingleChildScrollView( // Wrap with SingleChildScrollView
@@ -173,8 +174,6 @@ class _page1State extends State<page1> {
                         ),
 
 
-
-
                         SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -193,6 +192,29 @@ class _page1State extends State<page1> {
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
                                 ),
                                 child: Text("My Documents "),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 10),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 160,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) =>   VideoUploadScreen (),),);
+
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                ),
+                                child: Text("Video Introduction "),
                               ),
                             ),
                           ],

@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:myprofileapk/page1.dart';
 
-
-import 'package:myprofileapk/myprofilefolder/page1.dart';
 
 import 'Experincepage.dart';
 
