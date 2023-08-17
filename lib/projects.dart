@@ -1,19 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Project {
-  final String title;
-  final String description;
-
-  Project({required this.title, required this.description});
+void main() {
+  runApp(MyApp());
 }
 
-class MyProjectApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Project Page',
+      title: 'My Project Page',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.teal,
       ),
       home: ProjectPage(),
     );
@@ -26,15 +24,44 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  List<Project> projects = [];
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  List<Map<String, String>> projects = [];
 
-  void _addProject() {
+  TextEditingController projectTitleController = TextEditingController();
+  TextEditingController projectDescriptionController = TextEditingController();
+  TextEditingController projectLinkController = TextEditingController();
+  TextEditingController technologiesUsedController = TextEditingController();
+  TextEditingController editProjectTitleController = TextEditingController();
+  TextEditingController editProjectDescriptionController =
+  TextEditingController();
+  TextEditingController editProjectLinkController = TextEditingController();
+  TextEditingController editTechnologiesUsedController =
+  TextEditingController();
+
+  void addProject(String title, String description, String link,
+      String technologiesUsed) {
     setState(() {
-      projects.add(Project(title: _titleController.text, description: _descriptionController.text));
-      _titleController.clear();
-      _descriptionController.clear();
+      projects.add({
+        'title': title,
+        'description': description,
+        'link': link,
+        'technologiesUsed': technologiesUsed,
+      });
+    });
+  }
+
+  void editProject(int index, String newTitle, String newDescription,
+      String newLink, String newTechnologiesUsed) {
+    setState(() {
+      projects[index]['title'] = newTitle;
+      projects[index]['description'] = newDescription;
+      projects[index]['link'] = newLink;
+      projects[index]['technologiesUsed'] = newTechnologiesUsed;
+    });
+  }
+
+  void deleteProject(int index) {
+    setState(() {
+      projects.removeAt(index);
     });
   }
 
@@ -44,104 +71,158 @@ class _ProjectPageState extends State<ProjectPage> {
       appBar: AppBar(
         title: Center(child: Text('My Projects')),
       ),
-      body: ListView.builder(
-        itemCount: projects.length,
-        itemBuilder: (context, index) {
-          return ProjectCard(project: projects[index]);
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (BuildContext context) {
-              return AnimatedPadding(
-                duration: Duration(milliseconds: 300),
-                padding: MediaQuery.of(context).viewInsets,
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextField(
-                        controller: _titleController,
-                        decoration: InputDecoration(labelText: 'Project Title'),
+      body: Center(
+        child: Container(
+          height: 800,
+          width: 400,
+          padding: EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: Colors.teal,
+            ),
+          ),
+          child: Column(
+            children: [
+              TextField(
+                controller: projectTitleController,
+                decoration: InputDecoration(labelText: 'Project Title'),
+              ),
+              TextField(
+                controller: projectDescriptionController,
+                decoration: InputDecoration(labelText: 'Project Description'),
+              ),
+              TextField(
+                controller: projectLinkController,
+                decoration: InputDecoration(labelText: 'Project Link'),
+              ),
+              TextField(
+                controller: technologiesUsedController,
+                decoration: InputDecoration(labelText: 'Technologies Used'),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  addProject(
+                    projectTitleController.text,
+                    projectDescriptionController.text,
+                    projectLinkController.text,
+                    technologiesUsedController.text,
+                  );
+                  projectTitleController.clear();
+                  projectDescriptionController.clear();
+                  projectLinkController.clear();
+                  technologiesUsedController.clear();
+                },
+                child: Text('Add Project'),
+              ),
+              SizedBox(height: 20),
+              Text('Projects:'),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: projects.length,
+                  itemBuilder: (context, index) {
+                    final title = projects[index]['title'] ?? '';
+                    final description = projects[index]['description'] ?? '';
+                    final link = projects[index]['link'] ?? '';
+                    final technologiesUsed =
+                        projects[index]['technologiesUsed'] ?? '';
+
+                    return ListTile(
+                      title: Text(
+                        title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      SizedBox(height: 16.0),
-                      TextField(
-                        controller: _descriptionController,
-                        decoration: InputDecoration(labelText: 'Project Description'),
-                        maxLines: 4,
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(description),
+                          Text('Link: $link'),
+                          Text('Technologies Used: $technologiesUsed'),
+                        ],
                       ),
-                      SizedBox(height: 16.0),
-                      ElevatedButton(
-                        onPressed: () {
-                          Future.delayed(Duration(milliseconds: 200), () {
-                            _addProject();
-                            Navigator.pop(context);
-                          });
-                        },
-                        child: Text('Add Project'),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              editProjectTitleController.text = title;
+                              editProjectDescriptionController.text =
+                                  description;
+                              editProjectLinkController.text = link;
+                              editTechnologiesUsedController.text =
+                                  technologiesUsed;
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Edit Project'),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextField(
+                                          controller: editProjectTitleController,
+                                          decoration: InputDecoration(
+                                              labelText: 'Project Title'),
+                                        ),
+                                        TextField(
+                                          controller:
+                                          editProjectDescriptionController,
+                                          decoration: InputDecoration(
+                                              labelText: 'Project Description'),
+                                        ),
+                                        TextField(
+                                          controller: editProjectLinkController,
+                                          decoration: InputDecoration(
+                                              labelText: 'Project Link'),
+                                        ),
+                                        TextField(
+                                          controller:
+                                          editTechnologiesUsedController,
+                                          decoration: InputDecoration(
+                                              labelText: 'Technologies Used'),
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          editProject(
+                                            index,
+                                            editProjectTitleController.text,
+                                            editProjectDescriptionController.text,
+                                            editProjectLinkController.text,
+                                            editTechnologiesUsedController.text,
+                                          );
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Update'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            icon: Icon(Icons.edit),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              deleteProject(index);
+                            },
+                            icon: Icon(Icons.delete),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
-              );
-            },
-          );
-        },
-        tooltip: 'Add Project',
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class ProjectCard extends StatefulWidget {
-  final Project project;
-
-  ProjectCard({required this.project});
-
-  @override
-  _ProjectCardState createState() => _ProjectCardState();
-}
-
-class _ProjectCardState extends State<ProjectCard> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 500),
-    );
-    _scaleAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
-    _controller.forward();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _scaleAnimation,
-      child: Card(
-        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        child: ListTile(
-          title: Text(widget.project.title),
-          subtitle: Text(widget.project.description),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-}
-
-void main() {
-  runApp(MyProjectApp());
 }

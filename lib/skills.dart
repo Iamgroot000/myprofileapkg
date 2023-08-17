@@ -82,6 +82,7 @@ class _SkillsPageState extends State<SkillsPage> {
                 controller: skillController,
                 decoration: InputDecoration(labelText: 'Add Skill'),
               ),
+              SizedBox(height:20),
               ElevatedButton(
                 onPressed: () {
                   addSkill(skillController.text);
@@ -98,6 +99,7 @@ class _SkillsPageState extends State<SkillsPage> {
                 controller: descriptionController,
                 decoration: InputDecoration(labelText: 'Add Project Description'),
               ),
+              SizedBox(height: 20,),
               ElevatedButton(
                 onPressed: () {
                   addProject(projectController.text, descriptionController.text);

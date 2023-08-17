@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:myprofileapk/document.dart';
 import 'package:myprofileapk/projects.dart';
 import 'package:myprofileapk/skills.dart';
-import 'package:myprofileapk/videointro.dart';
+import 'package:myprofileapk/videointroduction.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
@@ -41,8 +41,8 @@ class _page1State extends State<page1> {
     return Stack(
       children : [
         Container(
-          color: Colors.black
-          ,
+          color: Colors.black,
+          //,
           child: Column(
             children: [
               Center(
@@ -119,7 +119,7 @@ class _page1State extends State<page1> {
                               child: ElevatedButton(
                                 onPressed: () { Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => MyexperienceApp  ()), // Replace SecondScreen() with your desired screen widget
+                                  MaterialPageRoute(builder: (context) => ExperiencePage  ()), // Replace SecondScreen() with your desired screen widget
                                 );},
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
@@ -141,7 +141,7 @@ class _page1State extends State<page1> {
                                 onPressed: () {
                                   Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>  MyProjectApp  ()), // Replace SecondScreen() with your desired screen widget
+                                  MaterialPageRoute(builder: (context) => ProjectPage ()), // Replace SecondScreen() with your desired screen widget
                                 );},
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
@@ -162,7 +162,7 @@ class _page1State extends State<page1> {
                               child: ElevatedButton(
                                 onPressed: () { Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>  MyqualificationApp  ()), // Replace SecondScreen() with your desired screen widget
+                                  MaterialPageRoute(builder: (context) =>  QualificationPage   ()), // Replace SecondScreen() with your desired screen widget
                                 );},
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
@@ -208,7 +208,7 @@ class _page1State extends State<page1> {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) =>   VideoUploadScreen (),),);
+                                    MaterialPageRoute(builder: (context) =>   MyvdocumentApp()),);
 
                                 },
                                 style: ButtonStyle(
@@ -257,8 +257,11 @@ class _page1State extends State<page1> {
           bottom: 0, // Aligns the bottom edge of the child to the bottom edge of the Stack
           right: 100,  // Aligns the right edge of the child to the right edge of the Stack
           child: Container(
-            height: 240,
-            width: 200,
+            height: 260,
+           width: 200,
+    // color: Colors.white,
+    // decoration: BoxDecoration(
+    // border: Border.all(color: Colors.blue),),
             child: RadialMenu(
     children: [
       ///button which is in bottom center ,
@@ -309,7 +312,41 @@ class _page1State extends State<page1> {
     ),
 
     ),
+
     ),
+    Positioned(
+    bottom: 200, // Aligns the bottom edge of the child to the bottom edge of the Stack
+    right: 70,
+     child:
+      Column(
+         children: [
+               IconButton(
+                 onPressed: () {},
+                 icon: Icon(
+                   Icons.menu,
+                   color: Colors.blue, // Set the icon color to blue
+                 ),
+               ),
+         ],
+       ),
+    ),
+
+
+        Positioned(
+          bottom: 10, // Aligns the bottom edge of the child to the bottom edge of the Stack
+          left: 153,
+          child:
+          Column(
+            children: [
+              OutlinedButton(
+                onPressed: () {}, child: Text("Thanks for Visit"),
+               
+                ),
+          
+            ],
+          ),
+        ),
+
         Container(
           height: 40,
             width: 600,
@@ -376,6 +413,21 @@ void _showPhoneNumberDialog(BuildContext context) {
             },
             child: Text('Call'),
           ),
+         // Container(
+         //   height: 15,
+         //   width: 20,
+         //   child: Column(
+         //      children: [
+         //        IconButton(
+         //          onPressed: () {},
+         //          icon: Icon(
+         //            Icons.menu,
+         //            color: Colors.blue, // Set the icon color to blue
+         //          ),
+         //        ),
+         //      ],
+         //    ),
+         // )
         ],
       );
     },

@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          color: Colors.black,
+          //color: Colors.black,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
