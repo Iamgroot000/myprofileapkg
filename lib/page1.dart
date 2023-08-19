@@ -12,6 +12,7 @@ import 'package:myprofileapk/skills.dart';
 import 'package:myprofileapk/videointroduction.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:uuid/uuid.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 import '../floating.dart';
@@ -253,6 +254,9 @@ class _page1State extends State<page1> {
 
             ],),
         ),
+
+
+        
         Positioned(
           bottom: 0, // Aligns the bottom edge of the child to the bottom edge of the Stack
           right: 100,  // Aligns the right edge of the child to the right edge of the Stack
@@ -314,22 +318,54 @@ class _page1State extends State<page1> {
     ),
 
     ),
-    Positioned(
-    bottom: 200, // Aligns the bottom edge of the child to the bottom edge of the Stack
-    right: 70,
-     child:
-      Column(
-         children: [
-               IconButton(
-                 onPressed: () {},
-                 icon: Icon(
-                   Icons.menu,
-                   color: Colors.blue, // Set the icon color to blue
-                 ),
-               ),
-         ],
-       ),
-    ),
+    // Positioned(
+    // bottom: 200, // Aligns the bottom edge of the child to the bottom edge of the Stack
+    // right: 70,
+    //  child:
+    //   Column(
+    //      children: [
+    //            IconButton(
+    //              onPressed: () {},
+    //              icon: Icon(
+    //                Icons.menu,
+    //                color: Colors.blue, // Set the icon color to blue
+    //              ),
+    //            ),
+    //      ],
+    //    ),
+    // ),
+
+        Positioned(
+          bottom: 170, // Aligns the bottom edge of the child to the bottom edge of the Stack
+          left: 115,
+          child:
+          Column(
+            children: [
+              Container(
+                height: 50,
+                width: 200,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue), // Add a border
+                  borderRadius: BorderRadius.circular(10,), // Add rounded corners
+                ),
+                child: const Center(
+                  child: Text(
+                    "Connect With Me",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.blue,
+                     // decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+
+              )
+             ],
+          ),
+        ),
+
+
+
 
 
         Positioned(
@@ -340,9 +376,9 @@ class _page1State extends State<page1> {
             children: [
               OutlinedButton(
                 onPressed: () {}, child: Text("Thanks for Visit"),
-               
+
                 ),
-          
+
             ],
           ),
         ),
@@ -518,8 +554,6 @@ Future<String> generateProfileLink() async {
   // For now, let's return a dummy link
   return "https://your-website.com/your-profile-page";
 }
-
-
 
 
 
