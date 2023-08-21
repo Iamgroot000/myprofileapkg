@@ -22,7 +22,6 @@ import 'Qualification.dart';
 
 
 
-
 class page1 extends StatefulWidget {
   final image;
 
@@ -39,357 +38,417 @@ class _page1State extends State<page1> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children : [
-        Container(
-          color: Colors.black,
-          //,
-          child: Column(
-            children: [
-              Center(
-                child: Container(
-                  height:650,
-                  width: 400,
-                 // color: Colors.white,
-                  child: SingleChildScrollView( // Wrap with SingleChildScrollView
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 58,),
-                        CircleAvatar(
-                          radius: 100,
-                          foregroundImage: widget.image == ""?
-                          Image.asset("assets/gaurav.jpg").image:
+    return Scaffold(
+      body: Stack(
+          children : [
+            Container(
+              color: Colors.black,
+              //,
+              child: Column(
+                children: [
+                  Center(
+                    child: Container(
+                      height:650,
+                      width: 400,
+                      // color: Colors.white,
+                      child: SingleChildScrollView( // Wrap with SingleChildScrollView
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 58,),
+                            CircleAvatar(
+                              radius: 100,
+                              foregroundImage: widget.image == ""?
+                              Image.asset("assets/gaurav.jpg").image:
                               /// use widget.image when you want to updtae your image through previous page
-                          Image.file(File(widget.image)).image,
-                        ),
+                              Image.file(File(widget.image)).image,
+                            ),
 
-                        SizedBox(height: 10),
-                        Text(
-                          'Gaurav Parmar',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          'Flutter Developer',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 100,
-                              child: ElevatedButton(
-                                onPressed: () { Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) =>  SkillsPage ()), // Replace SecondScreen() with your desired screen widget
-                                );},
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                                ),
-                                child: Text("Skills"),
+                            SizedBox(height: 10),
+                            Text(
+                              'Gaurav Parmar',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
-                        ),
-
-
-
-                        SizedBox(height: 10),
-                        // Divider(  // Add a divider line here
-                        //   color: Colors.blueAccent,
-                        //   height: 20,
-                        //   thickness: 1,
-                        //   indent: 30,
-                        //   endIndent: 30,
-                        // ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 150,
-                              child: ElevatedButton(
-                                onPressed: () { Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => ExperiencePage  ()), // Replace SecondScreen() with your desired screen widget
-                                );},
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                                ),
-                                child: Text("Experince"),
+                            SizedBox(height: 5),
+                            Text(
+                              'Flutter Developer',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
                               ),
                             ),
-                          ],
-                        ),
-
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 130,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => ProjectPage ()), // Replace SecondScreen() with your desired screen widget
-                                );},
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                            SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 100,
+                                  child: ElevatedButton(
+                                    onPressed: () { Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) =>  SkillsPage ()), // Replace SecondScreen() with your desired screen widget
+                                    );},
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                    ),
+                                    child: Text("Skills"),
+                                  ),
                                 ),
-                                child: Text("Projects "),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
 
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 160,
-                              child: ElevatedButton(
-                                onPressed: () { Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) =>  QualificationPage   ()), // Replace SecondScreen() with your desired screen widget
-                                );},
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+
+
+                            SizedBox(height: 10),
+                            // Divider(  // Add a divider line here
+                            //   color: Colors.blueAccent,
+                            //   height: 20,
+                            //   thickness: 1,
+                            //   indent: 30,
+                            //   endIndent: 30,
+                            // ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 150,
+                                  child: ElevatedButton(
+                                    onPressed: () { Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => ExperiencePage  ()), // Replace SecondScreen() with your desired screen widget
+                                    );},
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                    ),
+                                    child: Text("Experince"),
+                                  ),
                                 ),
-                                child: Text("Qualifications "),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
 
-
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 160,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) =>   MydocumentApp(),),);
-                                  // Replace SecondScreen() with your desired screen widget
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                            SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 130,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => ProjectPage ()), // Replace SecondScreen() with your desired screen widget
+                                      );},
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                    ),
+                                    child: Text("Projects "),
+                                  ),
                                 ),
-                                child: Text("My Documents "),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
 
-                        SizedBox(height: 10),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 160,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) =>   MyvdocumentApp()),);
-
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                            SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 160,
+                                  child: ElevatedButton(
+                                    onPressed: () { Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) =>  QualificationPage   ()), // Replace SecondScreen() with your desired screen widget
+                                    );},
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                    ),
+                                    child: Text("Qualifications "),
+                                  ),
                                 ),
-                                child: Text("Video Introduction "),
-                              ),
+                              ],
                             ),
+
+
+                            SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 160,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) =>   MydocumentApp(),),);
+                                      // Replace SecondScreen() with your desired screen widget
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                    ),
+                                    child: Text("My Documents "),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 10),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 160,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) =>   MyvdocumentApp()),);
+
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                    ),
+                                    child: Text("Video Introduction "),
+                                  ),
+                                ),
+                              ],
+                            ),
+
                           ],
                         ),
+                      ),
 
-                      ],
+
                     ),
                   ),
 
 
-                ),
+
+
+
+                  // Stack(
+                  //   children: [
+                  //     Row(
+                  //       children: [
+                  //         Align(
+                  //           alignment: Alignment.bottomRight,
+                  //           child: Container(
+                  //             height: 100,
+                  //             width: 100,
+                  //             color: Colors.green,
+                  //           ),
+                  //         ),
+                  //         // Add other widgets to the Column if needed
+                  //       ],
+                  //     ),
+                  //     // Add other Stack children if needed
+                  //   ],
+                  // )
+
+                ],),
+            ),
+
+
+
+            // Positioned(
+            //   bottom: 0, // Aligns the bottom edge of the child to the bottom edge of the Stack
+            //   right: 100,  // Aligns the right edge of the child to the right edge of the Stack
+            //   child: Container(
+            //     height: 260,
+            //     width: 200,
+            //     // color: Colors.white,
+            //     // decoration: BoxDecoration(
+            //     // border: Border.all(color: Colors.blue),),
+            //     child: RadialMenu(
+            //         children: [
+            //           ///button which is in bottom center ,
+            //           RadialButton(
+            //             icon: Icon(Icons.facebook),
+            //             buttonColor: Colors.blue,
+            //             onPress: () {
+            //               _showUrlDialog(context, _launchURL);
+            //             },
+            //           ),
+            //
+            //           /// call features
+            //           RadialButton(
+            //             icon: Icon(Icons.phone),
+            //             buttonColor: Colors.green,
+            //             onPress: () {
+            //               _showPhoneNumberDialog(context);
+            //             },
+            //           ),
+            //           RadialButton(
+            //             icon: Icon(Icons.no_encryption_gmailerrorred),
+            //             buttonColor: Colors.teal,
+            //             onPress: () {
+            //               _launchEmail();
+            //             },
+            //           ),
+            //
+            //           RadialButton(
+            //             icon: Icon(Icons.no_encryption_gmailerrorred),
+            //             buttonColor: Colors.orangeAccent,
+            //             onPress: () {
+            //               _generateAndShareLink();
+            //             },
+            //           ),
+            //
+            //
+            //
+            //
+            //           RadialButton(
+            //               icon: Icon(Icons.whatshot),
+            //               buttonColor: Colors.yellow,
+            //               onPress: () {
+            //                 launchWhatsApp();
+            //
+            //               }
+            //           )
+            //         ]
+            //     ),
+            //
+            //   ),
+            //
+            // ),
+            // Positioned(
+            // bottom: 200, // Aligns the bottom edge of the child to the bottom edge of the Stack
+            // right: 70,
+            //  child:
+            //   Column(
+            //      children: [
+            //            IconButton(
+            //              onPressed: () {},
+            //              icon: Icon(
+            //                Icons.menu,
+            //                color: Colors.blue, // Set the icon color to blue
+            //              ),
+            //            ),
+            //      ],
+            //    ),
+            // ),
+
+            Positioned(
+              bottom: 170, // Aligns the bottom edge of the child to the bottom edge of the Stack
+              left: 115,
+              child:
+              Column(
+                children: [
+                  Container(
+                    height: 50,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue), // Add a border
+                      borderRadius: BorderRadius.circular(10,), // Add rounded corners
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Connect With Me",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          // decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+
+                  )
+                ],
+              ),
+            ),
+
+
+
+
+
+            Positioned(
+              bottom: 10, // Aligns the bottom edge of the child to the bottom edge of the Stack
+              left: 153,
+              child:
+              Column(
+                children: [
+                  OutlinedButton(
+                    onPressed: () {}, child: Text("Thanks for Visit"),
+
+                  ),
+
+                ],
+              ),
+            ),
+
+            Container(
+              height: 40,
+              width: 600,
+              color: Colors.yellow,
+              //  child: Center(child: Text("MyProfile")),
+            )
+          ]),
+
+      floatingActionButton:Container(
+        height: 260,
+        width: 200,
+        // color: Colors.white,
+        // decoration: BoxDecoration(
+        // border: Border.all(color: Colors.blue),),
+        child: RadialMenu(
+            children: [
+              ///button which is in bottom center ,
+              RadialButton(
+                icon: Icon(Icons.facebook),
+                buttonColor: Colors.blue,
+                onPress: () {
+                  _showUrlDialog(context, _launchURL);
+                },
+              ),
+
+              /// call features
+              RadialButton(
+                icon: Icon(Icons.phone),
+                buttonColor: Colors.green,
+                onPress: () {
+                  _showPhoneNumberDialog(context);
+                },
+              ),
+              RadialButton(
+                icon: Icon(Icons.no_encryption_gmailerrorred),
+                buttonColor: Colors.teal,
+                onPress: () {
+                  _launchEmail();
+                },
+              ),
+
+              RadialButton(
+                icon: Icon(Icons.no_encryption_gmailerrorred),
+                buttonColor: Colors.orangeAccent,
+                onPress: () {
+                  _generateAndShareLink();
+                },
               ),
 
 
 
 
+              RadialButton(
+                  icon: Icon(Icons.whatshot),
+                  buttonColor: Colors.yellow,
+                  onPress: () {
+                    launchWhatsApp();
 
-    // Stack(
-              //   children: [
-              //     Row(
-              //       children: [
-              //         Align(
-              //           alignment: Alignment.bottomRight,
-              //           child: Container(
-              //             height: 100,
-              //             width: 100,
-              //             color: Colors.green,
-              //           ),
-              //         ),
-              //         // Add other widgets to the Column if needed
-              //       ],
-              //     ),
-              //     // Add other Stack children if needed
-              //   ],
-              // )
-
-            ],),
-        ),
-
-
-        
-        Positioned(
-          bottom: 0, // Aligns the bottom edge of the child to the bottom edge of the Stack
-          right: 100,  // Aligns the right edge of the child to the right edge of the Stack
-          child: Container(
-            height: 260,
-           width: 200,
-    // color: Colors.white,
-    // decoration: BoxDecoration(
-    // border: Border.all(color: Colors.blue),),
-            child: RadialMenu(
-    children: [
-      ///button which is in bottom center ,
-      RadialButton(
-        icon: Icon(Icons.facebook),
-        buttonColor: Colors.blue,
-        onPress: () {
-          _showUrlDialog(context, _launchURL);
-        },
-      ),
-
-      /// call features
-      RadialButton(
-        icon: Icon(Icons.phone),
-        buttonColor: Colors.green,
-        onPress: () {
-          _showPhoneNumberDialog(context);
-        },
-      ),
-      RadialButton(
-        icon: Icon(Icons.no_encryption_gmailerrorred),
-        buttonColor: Colors.teal,
-        onPress: () {
-          _launchEmail();
-        },
-      ),
-
-      RadialButton(
-        icon: Icon(Icons.no_encryption_gmailerrorred),
-        buttonColor: Colors.orangeAccent,
-        onPress: () {
-          _generateAndShareLink();
-        },
-      ),
-
-
-
-
-      RadialButton(
-    icon: Icon(Icons.whatshot),
-    buttonColor: Colors.yellow,
-    onPress: () {
-      launchWhatsApp();
-
-    }
-    )
-    ]
-    ),
-
-    ),
-
-    ),
-    // Positioned(
-    // bottom: 200, // Aligns the bottom edge of the child to the bottom edge of the Stack
-    // right: 70,
-    //  child:
-    //   Column(
-    //      children: [
-    //            IconButton(
-    //              onPressed: () {},
-    //              icon: Icon(
-    //                Icons.menu,
-    //                color: Colors.blue, // Set the icon color to blue
-    //              ),
-    //            ),
-    //      ],
-    //    ),
-    // ),
-
-        Positioned(
-          bottom: 170, // Aligns the bottom edge of the child to the bottom edge of the Stack
-          left: 115,
-          child:
-          Column(
-            children: [
-              Container(
-                height: 50,
-                width: 200,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue), // Add a border
-                  borderRadius: BorderRadius.circular(10,), // Add rounded corners
-                ),
-                child: const Center(
-                  child: Text(
-                    "Connect With Me",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.blue,
-                     // decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-
+                  }
               )
-             ],
-          ),
+            ]
         ),
 
-
-
-
-
-        Positioned(
-          bottom: 10, // Aligns the bottom edge of the child to the bottom edge of the Stack
-          left: 153,
-          child:
-          Column(
-            children: [
-              OutlinedButton(
-                onPressed: () {}, child: Text("Thanks for Visit"),
-
-                ),
-
-            ],
-          ),
-        ),
-
-        Container(
-          height: 40,
-            width: 600,
-          color: Colors.yellow,
-        //  child: Center(child: Text("MyProfile")),
-        )
-    ]);
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
 
 
 
@@ -399,6 +458,8 @@ class _page1State extends State<page1> {
 
 
   }
+
+
   getImage(){
 
   }
